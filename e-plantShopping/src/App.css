@@ -1,0 +1,308 @@
+/* LandingPage.css - Versión Mejorada */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.landing-page {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('https://cdn.pixabay.com/photo/2017/07/13/08/59/greenhouse-2499758_1280.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  filter: brightness(0.6) contrast(1.1);
+  transform: scale(1.05);
+  animation: slowZoom 20s ease-in-out infinite alternate;
+}
+
+@keyframes slowZoom {
+  0% { transform: scale(1.05); }
+  100% { transform: scale(1.1); }
+}
+
+.content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100vh;
+  width: 100vw;
+  padding: 0 80px;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.4) 0%,
+    rgba(0, 0, 0, 0.6) 50%,
+    rgba(76, 175, 80, 0.2) 100%
+  );
+  backdrop-filter: blur(2px);
+  z-index: 1;
+}
+
+.landing_content {
+  flex: 1;
+  max-width: 600px;
+  text-align: left;
+  color: white;
+  animation: slideInLeft 1.2s ease-out;
+}
+
+@keyframes slideInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.landing_content h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, #ffffff 0%, #e8f5e8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  animation: textGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes textGlow {
+  0% { filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3)); }
+  100% { filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.6)); }
+}
+
+.landing_content p {
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 40px;
+  line-height: 1.6;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.divider {
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, #4caf50, #81c784);
+  border-radius: 2px;
+  margin: 25px 0;
+  box-shadow: 0 2px 10px rgba(76, 175, 80, 0.4);
+  animation: growWidth 1.5s ease-out 0.5s both;
+}
+
+@keyframes growWidth {
+  0% { width: 0; }
+  100% { width: 80px; }
+}
+
+.get-started-button {
+  position: relative;
+  padding: 18px 40px;
+  font-size: 18px;
+  font-weight: 600;
+  border: none;
+  border-radius: 50px;
+  background: linear-gradient(135deg, #4caf50 0%, #66bb6a 100%);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
+  overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  animation: buttonFloat 1.8s ease-out 1s both;
+}
+
+@keyframes buttonFloat {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.get-started-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.get-started-button:hover::before {
+  left: 100%;
+}
+
+.get-started-button:hover {
+  background: linear-gradient(135deg, #45a049 0%, #5cb85c 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(76, 175, 80, 0.4);
+}
+
+.get-started-button:active {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3);
+}
+
+.aboutus_container {
+  flex: 1;
+  max-width: 500px;
+  margin-left: 60px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: slideInRight 1.2s ease-out 0.3s both;
+}
+
+@keyframes slideInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Efectos de desvanecimiento para transiciones */
+.landing-page.fade-out {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: all 0.5s ease-in-out;
+}
+
+.product-list-container {
+  position: absolute;
+  top: 100vh;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.95);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-y: auto;
+  z-index: 2;
+  backdrop-filter: blur(10px);
+}
+
+.product-list-container.visible {
+  top: 0;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1200px) {
+  .content {
+    padding: 0 60px;
+  }
+  
+  .aboutus_container {
+    margin-left: 40px;
+  }
+}
+
+@media screen and (max-width: 968px) {
+  .content {
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px;
+    gap: 40px;
+  }
+
+  .landing_content {
+    text-align: center;
+    max-width: 100%;
+  }
+
+  .aboutus_container {
+    margin-left: 0;
+    max-width: 100%;
+    padding: 30px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .content {
+    padding: 20px;
+    gap: 30px;
+  }
+
+  .landing_content h1 {
+    font-size: clamp(2rem, 6vw, 3rem);
+  }
+
+  .landing_content p {
+    font-size: clamp(1rem, 3vw, 1.4rem);
+  }
+
+  .get-started-button {
+    padding: 15px 30px;
+    font-size: 16px;
+  }
+
+  .aboutus_container {
+    padding: 25px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .content {
+    padding: 15px;
+  }
+
+  .background-image {
+    background-attachment: scroll;
+  }
+
+  .aboutus_container {
+    padding: 20px;
+    border-radius: 15px;
+  }
+}
+
+/* Añadir algunos efectos visuales extra */
+@media (prefers-reduced-motion: no-preference) {
+  .landing_content::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+    background: linear-gradient(45deg, transparent, rgba(76, 175, 80, 0.1), transparent);
+    border-radius: 20px;
+    z-index: -1;
+    animation: rotateGlow 8s linear infinite;
+    opacity: 0.5;
+  }
+
+  @keyframes rotateGlow {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+}
