@@ -2,7 +2,7 @@
 
 Este repositorio contiene múltiples proyectos desarrollados como parte del programa **IBM Full Stack Developer Professional Certificate** a través de IBM Skills Network.
 
-Cada subcarpeta representa un proyecto práctico y funcional enfocado en distintos aspectos del desarrollo backend, frontend y análisis con IA, incluyendo REST APIs con Express, aplicaciones React, sistemas web con Django, y procesamiento de lenguaje natural con IBM Watson.
+Cada subcarpeta representa un proyecto práctico y funcional enfocado en distintos aspectos del desarrollo backend, frontend y análisis con IA, incluyendo REST APIs con Express, aplicaciones React, sistemas web con Django, procesamiento de lenguaje natural con IBM Watson, y orquestación con Kubernetes.
 
 ---
 
@@ -12,6 +12,7 @@ Cada subcarpeta representa un proyecto práctico y funcional enfocado en distint
 IBM_Projects/
 ├── e-plantShopping/                    # React + Vite shopping app (Paradise Nursery)
 ├── expressBookReviews/                 # Node.js + Express API para reseñas de libros
+├── guestbook/                          # Kubernetes Guestbook App con autoescalado
 ├── oaqjp-final-project-emb-ai/         # Detección de emociones con Flask + IBM Watson NLU
 └── tfg-final-cloud-app-with-database/  # Sistema de cursos online con Django + exámenes
 ```
@@ -43,7 +44,39 @@ Un e-commerce SPA con carrito de compras, manejo de estado con Redux, categoría
 
 ---
 
-### 🧠 3. Emotion Detection App (`/oaqjp-final-project-emb-ai`)
+### 📓 3. Guestbook App - Kubernetes Deployment (`/guestbook`)
+
+> Aplicación de libro de visitas desplegada en Kubernetes con autoescalado, rollback y gestión de imágenes Docker.
+
+Una aplicación completa desarrollada en Go con frontend responsivo, desplegada en clúster Kubernetes con integración a IBM Cloud Container Registry, incluyendo componentes Redis para persistencia y características avanzadas de orquestación.
+
+**Características principales:**
+- 🐹 **Backend robusto**: Aplicación en Go con manejo de sesiones y persistencia
+- 🎨 **Frontend responsive**: HTML5 + CSS3 + jQuery con diseño moderno
+- 🐳 **Containerización**: Docker multi-stage builds optimizados
+- ⚙️ **Orquestación**: Kubernetes con deployments, services y secrets
+- 📈 **Autoescalado**: Horizontal Pod Autoscaler (HPA) basado en CPU
+- 🔄 **Rollback automático**: Gestión de versiones con kubectl rollout
+- 🗄️ **Persistencia**: Integración Redis master-slave para datos
+- ☁️ **Cloud Registry**: Imágenes gestionadas en IBM Cloud Container Registry
+
+**Tecnologías utilizadas:**
+- 🐹 **Backend**: Go (Golang) 1.18+
+- 🎨 **Frontend**: HTML5 + CSS3 + jQuery
+- 🐳 **Contenedores**: Docker + Docker Desktop con Kubernetes
+- ☸️ **Orquestación**: Kubernetes (deployments, services, HPA)
+- 🗄️ **Base de datos**: Redis (master-slave configuration)
+- ☁️ **Registry**: IBM Cloud Container Registry
+- 🧪 **Load Testing**: BusyBox para pruebas de escalado
+
+**Flujo de despliegue:**
+1. Build de imágenes Docker → Push a IBM Cloud Registry → Deploy en Kubernetes → Configurar autoescalado → Testing de carga → Rollback si es necesario
+
+- 📄 Documentación completa con comandos step-by-step en su `README.md`
+
+---
+
+### 🧠 4. Emotion Detection App (`/oaqjp-final-project-emb-ai`)
 
 > Aplicación web de detección de emociones usando IBM Watson Natural Language Understanding (NLU).
 
@@ -56,7 +89,7 @@ Permite analizar texto ingresado por el usuario e identificar la emoción domina
 
 ---
 
-### 🎓 4. Sistema de Cursos Online (`/tfg-final-cloud-app-with-database`)
+### 🎓 5. Sistema de Cursos Online (`/tfg-final-cloud-app-with-database`)
 
 > Plataforma web completa de educación online con sistema de exámenes integrado construida con Django.
 
@@ -88,13 +121,14 @@ Una aplicación web full-stack que permite gestionar cursos, inscripciones de es
 
 Este repositorio agrupa proyectos educativos y prácticos realizados durante la certificación de IBM para reforzar habilidades en:
 
-- **Backend Development**: APIs RESTful (Express.js), aplicaciones web full-stack (Django)
+- **Backend Development**: APIs RESTful (Express.js), aplicaciones web full-stack (Django), microservicios (Go)
 - **Frontend Development**: SPAs modernas con React, interfaces responsivas con Bootstrap
-- **Bases de datos**: Modelado relacional, migraciones, administración de contenido
+- **Bases de datos**: Modelado relacional, NoSQL (Redis), migraciones, administración de contenido
 - **Autenticación y seguridad**: JWT, sesiones, CSRF protection, validación de datos
 - **Inteligencia Artificial**: Análisis de lenguaje natural (NLP) con IBM Watson
 - **Gestión del estado**: Redux Toolkit para aplicaciones complejas
-- **Despliegue y DevOps**: Configuración para cloud, pruebas automatizadas, CI/CD
+- **DevOps y Orquestación**: Docker, Kubernetes, autoescalado, rollback, CI/CD
+- **Cloud Computing**: IBM Cloud services, Container Registry, despliegue en la nube
 
 ---
 
@@ -102,26 +136,27 @@ Este repositorio agrupa proyectos educativos y prácticos realizados durante la 
 
 | Categoría | Tecnologías |
 |-----------|-------------|
-| **Backend** | Node.js, Express.js, Python, Django, Flask |
-| **Frontend** | React, Redux Toolkit, HTML5, CSS3, Bootstrap 4, JavaScript ES6+ |
-| **Bases de datos** | SQLite, PostgreSQL |
+| **Backend** | Node.js, Express.js, Python, Django, Flask, Go (Golang) |
+| **Frontend** | React, Redux Toolkit, HTML5, CSS3, Bootstrap 4, JavaScript ES6+, jQuery |
+| **Bases de datos** | SQLite, PostgreSQL, Redis |
 | **IA/ML** | IBM Watson NLU, Natural Language Processing |
 | **Autenticación** | JWT, Django Auth, express-session |
-| **Herramientas** | Vite, npm, pip, Django Admin |
-| **Despliegue** | Vercel, Cloud Foundry, Heroku |
+| **DevOps** | Docker, Kubernetes, IBM Cloud Container Registry |
+| **Herramientas** | Vite, npm, pip, Django Admin, kubectl |
+| **Despliegue** | Vercel, Cloud Foundry, Heroku, IBM Cloud |
 
 ---
 
 ## 🧠 Nota personal
 
-> Cada proyecto aquí incluido fue desarrollado con el objetivo de aprender, aplicar buenas prácticas y preparar soluciones funcionales listas para despliegue o integración en proyectos más grandes. El portafolio demuestra capacidades full-stack desde APIs hasta interfaces de usuario complejas y análisis con IA.
+> Cada proyecto aquí incluido fue desarrollado con el objetivo de aprender, aplicar buenas prácticas y preparar soluciones funcionales listas para despliegue o integración en proyectos más grandes. El portafolio demuestra capacidades full-stack desde APIs hasta interfaces de usuario complejas, análisis con IA, y orquestación de contenedores con Kubernetes.
 
 ---
 
 ## 👤 Autor
 
 **Katapentakill**  
-Full Stack Developer | IBM Certified  
+Full Stack Developer | IBM Certified | DevOps Enthusiast  
 [GitHub Profile](https://github.com/Katapentakill)
 
 ---
