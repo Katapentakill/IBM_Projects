@@ -2,7 +2,7 @@
 
 Este repositorio contiene múltiples proyectos desarrollados como parte del programa **IBM Full Stack Developer Professional Certificate** a través de IBM Skills Network.
 
-Cada subcarpeta representa un proyecto práctico y funcional enfocado en distintos aspectos del desarrollo backend y frontend moderno, incluyendo REST APIs con Express y aplicaciones frontend modernas con React + Vite.
+Cada subcarpeta representa un proyecto práctico y funcional enfocado en distintos aspectos del desarrollo backend, frontend y análisis con IA, incluyendo REST APIs con Express, aplicaciones React, y procesamiento de lenguaje natural con IBM Watson.
 
 ---
 
@@ -10,8 +10,9 @@ Cada subcarpeta representa un proyecto práctico y funcional enfocado en distint
 
 ```
 IBM_Projects/
-├── e-plantShopping/         # React + Vite shopping app (Paradise Nursery)
-└── expressBookReviews/      # Node.js + Express API para reseñas de libros
+├── e-plantShopping/               # React + Vite shopping app (Paradise Nursery)
+├── expressBookReviews/           # Node.js + Express API para reseñas de libros
+└── oaqjp-final-project-emb-ai/   # Detección de emociones con Flask + IBM Watson NLU
 ```
 
 ---
@@ -41,6 +42,19 @@ Un e-commerce SPA con carrito de compras, manejo de estado con Redux, categoría
 
 ---
 
+### 🧠 3. Emotion Detection App (`/oaqjp-final-project-emb-ai`)
+
+> Aplicación web de detección de emociones usando IBM Watson Natural Language Understanding (NLU).
+
+Permite analizar texto ingresado por el usuario e identificar la emoción dominante (alegría, tristeza, miedo, disgusto o ira), integrando una API de Flask con frontend dinámico en JavaScript y backend conectado a Watson NLU.
+
+- 🤖 Tecnologías: Python, Flask, IBM Watson NLU, JavaScript, Bootstrap
+- 💻 Interfaz: Web interactiva + API
+- 🧪 Pruebas unitarias: Incluidas con `unittest`
+- 📄 Detalles completos en su `README.md`
+
+---
+
 ## 📌 Propósito
 
 Este repositorio agrupa proyectos educativos y prácticos realizados durante la certificación de IBM para reforzar habilidades en:
@@ -48,9 +62,9 @@ Este repositorio agrupa proyectos educativos y prácticos realizados durante la 
 - Desarrollo de APIs RESTful
 - Autenticación y manejo de sesiones
 - Desarrollo frontend moderno con React
+- Análisis de lenguaje natural (NLP) con IBM Watson
 - Gestión del estado global (Redux)
-- Integración con plataformas de despliegue (Vercel)
-- Uso de herramientas como Postman y Axios
+- Despliegue y pruebas automatizadas
 
 ---
 
