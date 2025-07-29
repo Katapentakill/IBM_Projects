@@ -1,3 +1,4 @@
+/* frontend/src/globals.css */
 @import "tailwindcss";
 
 :root {
@@ -24,3 +25,25 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* globals.css — extracto */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, sans-serif;
+  background-color: #f9fafb; /* gris muy claro */
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Evitar desplazamiento brusco del sticky header en iOS */
+header {
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+}
+
+/* Tailwind utility classes (se agregarán automáticamente) */
