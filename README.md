@@ -2,7 +2,7 @@
 
 Este repositorio contiene múltiples proyectos desarrollados como parte del programa **IBM Full Stack Developer Professional Certificate** a través de IBM Skills Network.
 
-Cada subcarpeta representa un proyecto práctico y funcional enfocado en distintos aspectos del desarrollo backend, frontend y análisis con IA, incluyendo REST APIs con Express, aplicaciones React, sistemas web con Django, procesamiento de lenguaje natural con IBM Watson, y orquestación con Kubernetes.
+Cada subcarpeta representa un proyecto práctico y funcional enfocado en distintos aspectos del desarrollo backend, frontend y análisis con IA, incluyendo REST APIs con Express, aplicaciones React, sistemas web con Django, procesamiento de lenguaje natural con IBM Watson, arquitecturas de microservicios, y orquestación con Kubernetes.
 
 ---
 
@@ -10,6 +10,7 @@ Cada subcarpeta representa un proyecto práctico y funcional enfocado en distint
 
 ```
 IBM_Projects/
+├── Microservice/                       # Evaluación de Concesionarios - Microservicios con Docker
 ├── e-plantShopping/                    # React + Vite shopping app (Paradise Nursery)
 ├── expressBookReviews/                 # Node.js + Express API para reseñas de libros
 ├── guestbook/                          # Kubernetes Guestbook App con autoescalado
@@ -21,7 +22,36 @@ IBM_Projects/
 
 ## 📁 Proyectos Incluidos
 
-### 📚 1. Express Book Reviews (`/expressBookReviews`)
+### 🚗 1. Evaluación de Concesionarios - Microservicios (`/Microservice`)
+
+> Sistema de evaluación de concesionarios basado en arquitectura de microservicios desplegada localmente con Docker Desktop.
+
+Una aplicación distribuida que integra múltiples servicios independientes para gestionar productos, concesionarios y precios, demostrando principios de arquitectura de microservicios, containerización y comunicación entre servicios.
+
+**Características principales:**
+- 🔧 **Microservicio de Productos**: API Flask en Python para gestión de productos
+- 🏪 **Microservicio de Concesionarios**: API Express en Node.js para dealers y precios
+- 🎨 **Frontend Flask**: Template HTML servido por Flask con Nginx
+- 🐳 **Containerización completa**: Cada servicio en su propio contenedor Docker
+- 🔗 **Comunicación entre servicios**: APIs RESTful independientes
+- 📊 **Interfaz integrada**: Dropdown de productos con precios por concesionario
+
+**Tecnologías utilizadas:**
+- 🐍 **Backend Productos**: Python + Flask (Puerto 5000)
+- 🟢 **Backend Concesionarios**: Node.js + Express (Puerto 8080)
+- 🎨 **Frontend**: Python + Flask + HTML Templates + Nginx (Puerto 5001)
+- 🐳 **Contenedores**: Docker Desktop + docker-compose
+- 🌐 **Arquitectura**: RESTful microservices pattern
+
+**Flujo de despliegue:**
+1. Clone de repositorios → Build de imágenes Docker → Deploy de contenedores → Verificación de servicios → Testing de integración
+
+- 📦 Tecnologías: Docker, Flask, Express, Nginx, Microservices Architecture
+- 📄 Documentación completa con comandos Docker en su `README.md`
+
+---
+
+### 📚 2. Express Book Reviews (`/expressBookReviews`)
 
 > Proyecto final del curso **"Developing APIs with Node.js and Express"**
 
@@ -32,7 +62,7 @@ Una API REST para la gestión de reseñas de libros, con autenticación JWT, ses
 
 ---
 
-### 🪴 2. Paradise Nursery - React Shopping App (`/e-plantShopping`)
+### 🪴 3. Paradise Nursery - React Shopping App (`/e-plantShopping`)
 
 > Aplicación de tienda de plantas construida con React, Redux Toolkit y Vite.
 
@@ -44,7 +74,7 @@ Un e-commerce SPA con carrito de compras, manejo de estado con Redux, categoría
 
 ---
 
-### 📓 3. Guestbook App - Kubernetes Deployment (`/guestbook`)
+### 📓 4. Guestbook App - Kubernetes Deployment (`/guestbook`)
 
 > Aplicación de libro de visitas desplegada en Kubernetes con autoescalado, rollback y gestión de imágenes Docker.
 
@@ -76,7 +106,7 @@ Una aplicación completa desarrollada en Go con frontend responsivo, desplegada 
 
 ---
 
-### 🧠 4. Emotion Detection App (`/oaqjp-final-project-emb-ai`)
+### 🧠 5. Emotion Detection App (`/oaqjp-final-project-emb-ai`)
 
 > Aplicación web de detección de emociones usando IBM Watson Natural Language Understanding (NLU).
 
@@ -89,7 +119,7 @@ Permite analizar texto ingresado por el usuario e identificar la emoción domina
 
 ---
 
-### 🎓 5. Sistema de Cursos Online (`/tfg-final-cloud-app-with-database`)
+### 🎓 6. Sistema de Cursos Online (`/tfg-final-cloud-app-with-database`)
 
 > Plataforma web completa de educación online con sistema de exámenes integrado construida con Django.
 
@@ -121,8 +151,9 @@ Una aplicación web full-stack que permite gestionar cursos, inscripciones de es
 
 Este repositorio agrupa proyectos educativos y prácticos realizados durante la certificación de IBM para reforzar habilidades en:
 
-- **Backend Development**: APIs RESTful (Express.js), aplicaciones web full-stack (Django), microservicios (Go)
+- **Backend Development**: APIs RESTful (Express.js), aplicaciones web full-stack (Django), microservicios (Go, Python, Node.js)
 - **Frontend Development**: SPAs modernas con React, interfaces responsivas con Bootstrap
+- **Arquitecturas Distribuidas**: Microservicios, comunicación entre servicios, containerización
 - **Bases de datos**: Modelado relacional, NoSQL (Redis), migraciones, administración de contenido
 - **Autenticación y seguridad**: JWT, sesiones, CSRF protection, validación de datos
 - **Inteligencia Artificial**: Análisis de lenguaje natural (NLP) con IBM Watson
@@ -142,14 +173,15 @@ Este repositorio agrupa proyectos educativos y prácticos realizados durante la 
 | **IA/ML** | IBM Watson NLU, Natural Language Processing |
 | **Autenticación** | JWT, Django Auth, express-session |
 | **DevOps** | Docker, Kubernetes, IBM Cloud Container Registry |
-| **Herramientas** | Vite, npm, pip, Django Admin, kubectl |
-| **Despliegue** | Vercel, Cloud Foundry, Heroku, IBM Cloud |
+| **Arquitectura** | Microservices, RESTful APIs, Container Orchestration |
+| **Herramientas** | Vite, npm, pip, Django Admin, kubectl, Docker Desktop |
+| **Despliegue** | Vercel, Cloud Foundry, Heroku, IBM Cloud, Nginx |
 
 ---
 
 ## 🧠 Nota personal
 
-> Cada proyecto aquí incluido fue desarrollado con el objetivo de aprender, aplicar buenas prácticas y preparar soluciones funcionales listas para despliegue o integración en proyectos más grandes. El portafolio demuestra capacidades full-stack desde APIs hasta interfaces de usuario complejas, análisis con IA, y orquestación de contenedores con Kubernetes.
+> Cada proyecto aquí incluido fue desarrollado con el objetivo de aprender, aplicar buenas prácticas y preparar soluciones funcionales listas para despliegue o integración en proyectos más grandes. El portafolio demuestra capacidades full-stack desde APIs hasta interfaces de usuario complejas, análisis con IA, arquitecturas de microservicios, y orquestación de contenedores con Kubernetes.
 
 ---
 
