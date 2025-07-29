@@ -1,10 +1,10 @@
-// src/app/login/page.tsx
 'use client';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useState, Suspense } from 'react';
 import { loginUser } from '@/lib/api';
 import { useAuth } from '@/context/AuthContext';
 import Link from 'next/link';
+import RegisteredNotice from './RegisteredNotice';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -12,10 +12,7 @@ export default function LoginPage() {
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
-  const searchParams = useSearchParams();
   const { login } = useAuth();
-
-  const registered = searchParams.get('registered') === 'true';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -37,15 +34,13 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
         <h1 className="text-2xl font-bold mb-6 text-center">Login</h1>
-        
-        {registered && (
-          <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
-            Registration successful! Please login.
-          </div>
-        )}
-        
+
+        <Suspense fallback={null}>
+          <RegisteredNotice />
+        </Suspense>
+
         {error && <p className="text-red-500 mb-4 text-center">{error}</p>}
-        
+
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block mb-1">Email*</label>
@@ -57,7 +52,7 @@ export default function LoginPage() {
               required
             />
           </div>
-          
+
           <div>
             <label className="block mb-1">Password*</label>
             <input
@@ -68,7 +63,7 @@ export default function LoginPage() {
               required
             />
           </div>
-          
+
           <button
             type="submit"
             disabled={isSubmitting}
@@ -77,7 +72,7 @@ export default function LoginPage() {
             {isSubmitting ? 'Logging in...' : 'Login'}
           </button>
         </form>
-        
+
         <p className="mt-4 text-center text-gray-600">
           Don't have an account?{' '}
           <Link href="/register" className="text-blue-600 hover:underline">
