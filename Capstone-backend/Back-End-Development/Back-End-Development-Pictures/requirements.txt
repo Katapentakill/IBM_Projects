@@ -1,0 +1,5 @@
+Flask==2.3.3
+pytest==7.4.2
+pytest-flask==1.2.0
+Werkzeug==2.3.7
+uuid==1.30

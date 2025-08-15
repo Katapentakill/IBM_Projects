@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block title %}Canciones - Rock Band Website{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1><i class="fas fa-music"></i> Nuestras Canciones</h1>
+        <a href="{% url 'song_create' %}" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Agregar Canción
+        </a>
+    </div>
+
+    {% if songs %}
+        <div class="row">
+            {% for song in songs %}
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ song.title }}</h5>
+                        <p class="card-subtitle mb-2 text-muted">
+                            <i class="fas fa-user"></i> {{ song.artist }}
+                        </p>
+                        <p class="card-text">
+                            <small>
+                                <i class="fas fa-compact-disc"></i> {{ song.album }}<br>
+                                <i class="fas fa-calendar"></i> {{ song.year|default:"Año desconocido" }}<br>
+                                <i class="fas fa-clock"></i> {{ song.duration }}
+                            </small>
+                        </p>
+                        <p class="card-text">{{ song.get_short_lyrics }}</p>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="badge bg-secondary">{{ song.genre }}</span>
+                            <small class="text-muted">{{ song.created_at|date:"d/m/Y" }}</small>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <a href="{% url 'song_detail' song.id %}" class="btn btn-sm btn-primary flex-fill">
+                                <i class="fas fa-eye"></i> Ver
+                            </a>
+                            <a href="{% url 'song_update' song.id %}" class="btn btn-sm btn-outline-warning">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a href="{% url 'song_delete' song.id %}" class="btn btn-sm btn-outline-danger">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Pagination -->
+        {% if page_obj.has_other_pages %}
+        <nav aria-label="Paginación de canciones">
+            <ul class="pagination justify-content-center">
+                {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1">Primera</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+                    </li>
+                {% endif %}
+
+                {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                        <li class="page-item active">
+                            <span class="page-link">{{ num }}</span>
+                        </li>
+                    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}">Siguiente</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Última</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% endif %}
+
+    {% else %}
+        <div class="text-center py-5">
+            <i class="fas fa-music fa-5x mb-4" style="opacity: 0.3;"></i>
+            <h3>No hay canciones aún</h3>
+            <p class="text-muted mb-4">¡Sé el primero en agregar una canción a nuestro repertorio!</p>
+            <a href="{% url 'song_create' %}" class="btn btn-primary btn-lg">
+                <i class="fas fa-plus"></i> Agregar Primera Canción
+            </a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

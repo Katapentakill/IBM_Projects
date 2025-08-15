@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+
+{% block title %}Editar Foto - Rock Band Website{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fas fa-edit"></i> Editar Foto: {{ photo.get_location }}</h3>
+                </div>
+                <div class="card-body">
+                    <form id="photoEditForm">
+                        <div class="mb-3">
+                            <label for="pic_url" class="form-label">URL de la Imagen *</label>
+                            <input type="url" class="form-control" id="pic_url" name="pic_url" 
+                                   value="{{ photo.pic_url }}" required>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="event_country" class="form-label">País *</label>
+                                    <input type="text" class="form-control" id="event_country" 
+                                           name="event_country" value="{{ photo.event_country }}" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="event_state" class="form-label">Estado/Provincia *</label>
+                                    <input type="text" class="form-control" id="event_state" 
+                                           name="event_state" value="{{ photo.event_state }}" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="event_city" class="form-label">Ciudad *</label>
+                                    <input type="text" class="form-control" id="event_city" 
+                                           name="event_city" value="{{ photo.event_city }}" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="event_date" class="form-label">Fecha del Evento *</label>
+                                    <input type="date" class="form-control" id="event_date" 
+                                           name="event_date" value="{{ photo.event_date|date:'Y-m-d' }}" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="photographer" class="form-label">Fotógrafo</label>
+                                    <input type="text" class="form-control" id="photographer" 
+                                           name="photographer" value="{{ photo.photographer|default:'' }}">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Descripción</label>
+                            <textarea class="form-control" id="description" name="description" rows="3">{{ photo.description|default:'' }}</textarea>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="is_featured" 
+                                       name="is_featured" {% if photo.is_featured %}checked{% endif %}>
+                                <label class="form-check-label" for="is_featured">
+                                    <i class="fas fa-star text-warning"></i> Marcar como foto destacada
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Vista previa actual -->
+                        <div class="mb-3">
+                            <label class="form-label">Imagen Actual:</label>
+                            <div class="text-center">
+                                <img src="{{ photo.pic_url }}" class="img-fluid rounded shadow" 
+                                     style="max-height: 200px;" alt="Imagen actual">
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between">
+                            <a href="{% url 'photo_detail' photo.id %}" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Cancelar
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Actualizar Foto
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Success Modal -->
+<div class="modal fade" id="successModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-check-circle text-success"></i> ¡Actualizado!
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>La foto ha sido actualizada exitosamente.</p>
+            </div>
+            <div class="modal-footer">
+                <a href="{% url 'photo_detail' photo.id %}" class="btn btn-primary">Ver Foto</a>
+                <a href="{% url 'photos_list' %}" class="btn btn-secondary">Galería</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.getElementById('photoEditForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(this);
+    const data = Object.fromEntries(formData);
+    
+    // Convertir checkbox a boolean
+    data.is_featured = document.getElementById('is_featured').checked;
+    
+    fetch('{% url "photo_update" photo.id %}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': '{{ csrf_token }}'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            const modal = new bootstrap.Modal(document.getElementById('successModal'));
+            modal.show();
+        } else {
+            alert('Error: ' + (data.error || 'Error desconocido'));
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error al actualizar la foto');
+    });
+});
+</script>
+{% endblock %}

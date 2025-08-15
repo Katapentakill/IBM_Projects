@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+
+{% block title %}Editar {{ song.title }} - Rock Band Website{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fas fa-edit"></i> Editar Canción: {{ song.title }}</h3>
+                </div>
+                <div class="card-body">
+                    <form id="songEditForm">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="title" class="form-label">Título *</label>
+                                    <input type="text" class="form-control" id="title" name="title" value="{{ song.title }}" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="artist" class="form-label">Artista *</label>
+                                    <input type="text" class="form-control" id="artist" name="artist" value="{{ song.artist }}" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="album" class="form-label">Álbum *</label>
+                                    <input type="text" class="form-control" id="album" name="album" value="{{ song.album }}" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="genre" class="form-label">Género</label>
+                                    <select class="form-select" id="genre" name="genre">
+                                        <option value="Rock" {% if song.genre == 'Rock' %}selected{% endif %}>Rock</option>
+                                        <option value="Pop" {% if song.genre == 'Pop' %}selected{% endif %}>Pop</option>
+                                        <option value="Jazz" {% if song.genre == 'Jazz' %}selected{% endif %}>Jazz</option>
+                                        <option value="Blues" {% if song.genre == 'Blues' %}selected{% endif %}>Blues</option>
+                                        <option value="Country" {% if song.genre == 'Country' %}selected{% endif %}>Country</option>
+                                        <option value="Electronic" {% if song.genre == 'Electronic' %}selected{% endif %}>Electronic</option>
+                                        <option value="Hip Hop" {% if song.genre == 'Hip Hop' %}selected{% endif %}>Hip Hop</option>
+                                        <option value="Alternative" {% if song.genre == 'Alternative' %}selected{% endif %}>Alternative</option>
+                                        <option value="Indie" {% if song.genre == 'Indie' %}selected{% endif %}>Indie</option>
+                                        <option value="Other" {% if song.genre == 'Other' %}selected{% endif %}>Otro</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="year" class="form-label">Año</label>
+                                    <input type="number" class="form-control" id="year" name="year" value="{{ song.year|default:'' }}" min="1900" max="2030">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="duration" class="form-label">Duración (MM:SS)</label>
+                            <input type="text" class="form-control" id="duration" name="duration" value="{{ song.duration }}" placeholder="3:45" pattern="[0-9]+:[0-5][0-9]">
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="lyrics" class="form-label">Letra de la Canción *</label>
+                            <textarea class="form-control" id="lyrics" name="lyrics" rows="8" required>{{ song.lyrics }}</textarea>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between">
+                            <a href="{% url 'song_detail' song.id %}" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Cancelar
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Actualizar Canción
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Success Modal -->
+<div class="modal fade" id="successModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-check-circle text-success"></i> ¡Actualizado!
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>La canción ha sido actualizada exitosamente.</p>
+            </div>
+            <div class="modal-footer">
+                <a href="{% url 'song_detail' song.id %}" class="btn btn-primary">Ver Canción</a>
+                <a href="{% url 'songs_list' %}" class="btn btn-secondary">Lista de Canciones</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.getElementById('songEditForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(this);
+    const data = Object.fromEntries(formData);
+    
+    fetch('{% url "song_update" song.id %}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': '{{ csrf_token }}'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            const modal = new bootstrap.Modal(document.getElementById('successModal'));
+            modal.show();
+        } else {
+            alert('Error: ' + (data.error || 'Error desconocido'));
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error al actualizar la canción');
+    });
+});
+</script>
+{% endblock %}

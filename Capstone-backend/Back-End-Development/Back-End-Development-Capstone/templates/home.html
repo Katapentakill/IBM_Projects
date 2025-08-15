@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+
+{% block title %}Inicio - Rock Band Website{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Hero Section -->
+    <div class="row align-items-center min-vh-100 py-5">
+        <div class="col-lg-6">
+            <h1 class="display-4 fw-bold mb-4">
+                <span style="color: #ff6b6b;">Rock</span> Band
+            </h1>
+            <p class="lead mb-4">
+                Bienvenidos al sitio oficial de nuestra banda. Descubre nuestra música, 
+                ve nuestras fotos de conciertos y mantente al día con todas nuestras novedades.
+            </p>
+            <div class="d-flex gap-3">
+                <a href="{% url 'songs_list' %}" class="btn btn-primary btn-lg">
+                    <i class="fas fa-music"></i> Explorar Música
+                </a>
+                <a href="{% url 'photos_list' %}" class="btn btn-outline-light btn-lg">
+                    <i class="fas fa-camera"></i> Ver Fotos
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="text-center">
+                <i class="fas fa-guitar display-1" style="color: #ff6b6b; opacity: 0.8;"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Statistics -->
+    <div class="row mb-5">
+        <div class="col-md-6">
+            <div class="card h-100 text-center">
+                <div class="card-body">
+                    <i class="fas fa-music fa-3x mb-3" style="color: #ff6b6b;"></i>
+                    <h3>{{ total_songs }}</h3>
+                    <p class="mb-0">Canciones en nuestro repertorio</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card h-100 text-center">
+                <div class="card-body">
+                    <i class="fas fa-camera fa-3x mb-3" style="color: #ffa726;"></i>
+                    <h3>{{ total_photos }}</h3>
+                    <p class="mb-0">Fotos de nuestros conciertos</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Latest Songs -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2><i class="fas fa-music"></i> Últimas Canciones</h2>
+                <a href="{% url 'songs_list' %}" class="btn btn-outline-light">Ver todas</a>
+            </div>
+            {% if latest_songs %}
+                <div class="row">
+                    {% for song in latest_songs %}
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ song.title }}</h5>
+                                <p class="card-subtitle mb-2 text-muted">{{ song.artist }}</p>
+                                <p class="card-text">
+                                    <small>{{ song.album }} - {{ song.year|default:"Año desconocido" }}</small>
+                                </p>
+                                <p class="card-text">{{ song.get_short_lyrics }}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="badge bg-secondary">{{ song.genre }}</span>
+                                    <a href="{% url 'song_detail' song.id %}" class="btn btn-sm btn-primary">Ver más</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="text-center py-5">
+                    <i class="fas fa-music fa-3x mb-3" style="opacity: 0.5;"></i>
+                    <p>No hay canciones disponibles aún.</p>
+                    <a href="{% url 'song_create' %}" class="btn btn-primary">Agregar primera canción</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Featured Photos -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2><i class="fas fa-camera"></i> Fotos Destacadas</h2>
+                <a href="{% url 'photos_list' %}" class="btn btn-outline-light">Ver todas</a>
+            </div>
+            {% if featured_photos %}
+                <div class="row">
+                    {% for photo in featured_photos %}
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="card h-100">
+                            <img src="{{ photo.pic_url }}" class="card-img-top" alt="Foto de {{ photo.get_location }}" style="height: 200px; object-fit: cover;">
+                            <div class="card-body">
+                                <h6 class="card-title">{{ photo.get_location }}</h6>
+                                <p class="card-text">
+                                    <small class="text-muted">{{ photo.event_date }}</small>
+                                </p>
+                                {% if photo.description %}
+                                    <p class="card-text">{{ photo.description|truncatewords:15 }}</p>
+                                {% endif %}
+                                <a href="{% url 'photo_detail' photo.id %}" class="btn btn-sm btn-primary">Ver detalles</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="text-center py-5">
+                    <i class="fas fa-camera fa-3x mb-3" style="opacity: 0.5;"></i>
+                    <p>No hay fotos destacadas aún.</p>
+                    <a href="{% url 'photo_create' %}" class="btn btn-primary">Agregar primera foto</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card text-center">
+                <div class="card-body py-5">
+                    <h3 class="mb-4">¿Quieres agregar contenido?</h3>
+                    <p class="mb-4">Ayúdanos a completar nuestro sitio web agregando más canciones y fotos.</p>
+                    <div class="d-flex justify-content-center gap-3">
+                        <a href="{% url 'song_create' %}" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Agregar Canción
+                        </a>
+                        <a href="{% url 'photo_create' %}" class="btn btn-outline-light">
+                            <i class="fas fa-plus"></i> Agregar Foto
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

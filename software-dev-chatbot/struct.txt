@@ -1,0 +1,9 @@
+software-dev-chatbot/
+├── public/
+│   ├── index.html
+│   ├── style.css
+│   ├── main.js
+│   └── chat.png          # tu icono
+├── openai.js
+├── server.js
+└── .env                  # tu clave de API aquí (no lo subas a Git)

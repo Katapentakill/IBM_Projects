@@ -1,0 +1,92 @@
+version: '3.8'
+
+services:
+  # Servicio de Pictures (Flask)
+  pictures-service:
+    build: ./Back-End-Development-Pictures
+    container_name: pictures_service
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=production
+      - FLASK_APP=app.py
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+    networks:
+      - backend
+
+  # Servicio de Songs (Flask)
+  songs-service:
+    build: ./Back-End-Development-Songs
+    container_name: songs_service
+    ports:
+      - "5001:5001"
+    environment:
+      - FLASK_ENV=production
+      - FLASK_APP=app.py
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+    networks:
+      - backend
+
+  # Aplicación Django
+  django-app:
+    build: ./Back-End-Development-Capstone
+    container_name: django_bandsite
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=False
+      - ALLOWED_HOSTS=*
+      - SECRET_KEY=django-insecure-production-key-change-this
+    volumes:
+      - django_static:/app/staticfiles
+      - django_media:/app/media
+    depends_on:
+      - pictures-service
+      - songs-service
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+    networks:
+      - backend
+      - frontend
+
+  # Nginx como proxy reverso (opcional para producción)
+  nginx:
+    image: nginx:alpine
+    container_name: nginx_proxy
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - django_static:/var/www/static:ro
+      - django_media:/var/www/media:ro
+    depends_on:
+      - django-app
+      - pictures-service
+      - songs-service
+    restart: unless-stopped
+    networks:
+      - frontend
+
+volumes:
+  django_static:
+  django_media:
+
+networks:
+  backend:
+    driver: bridge
+  frontend:
+    driver: bridge

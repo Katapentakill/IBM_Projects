@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ song.title }} - Rock Band Website{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h2><i class="fas fa-music"></i> {{ song.title }}</h2>
+                        <div>
+                            <a href="{% url 'song_update' song.id %}" class="btn btn-warning">
+                                <i class="fas fa-edit"></i> Editar
+                            </a>
+                            <a href="{% url 'song_delete' song.id %}" class="btn btn-danger">
+                                <i class="fas fa-trash"></i> Eliminar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <h5>Información de la Canción</h5>
+                            <table class="table table-dark table-borderless">
+                                <tr>
+                                    <td><strong>Artista:</strong></td>
+                                    <td>{{ song.artist }}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Álbum:</strong></td>
+                                    <td>{{ song.album }}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Género:</strong></td>
+                                    <td><span class="badge bg-secondary">{{ song.genre }}</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Año:</strong></td>
+                                    <td>{{ song.year|default:"No especificado" }}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Duración:</strong></td>
+                                    <td>{{ song.duration }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Metadatos</h5>
+                            <table class="table table-dark table-borderless">
+                                <tr>
+                                    <td><strong>Creado:</strong></td>
+                                    <td>{{ song.created_at|date:"d/m/Y H:i" }}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Actualizado:</strong></td>
+                                    <td>{{ song.updated_at|date:"d/m/Y H:i" }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h5>Letra de la Canción</h5>
+                        <div class="bg-dark p-4 rounded border">
+                            <pre class="mb-0 text-white" style="white-space: pre-wrap; font-family: inherit;">{{ song.lyrics }}</pre>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center">
+                        <a href="{% url 'songs_list' %}" class="btn btn-primary">
+                            <i class="fas fa-arrow-left"></i> Volver a la Lista
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
