@@ -322,7 +322,7 @@ Licencia MIT para uso académico y profesional.
 - 📧 **Email**: [alexandertapiaolmedo@gmail.com]
 - 💼 **LinkedIn**: [www.linkedin.com/in/alexander-gubier-oscar-tapia-olmedo-10aa3725b]
 - 🐙 **GitHub**: [@Katapentakill](https://github.com/Katapentakill)
-- 🌐 **Portfolio**: [tu-portfolio.com]
+- 🌐 **Portfolio**: [coming soon]
 
 ---
 
