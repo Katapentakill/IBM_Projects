@@ -319,8 +319,8 @@ Licencia MIT para uso académico y profesional.
 
 ¿Interesado en colaborar o discutir alguno de estos proyectos?
 
-- 📧 **Email**: [tu-email@ejemplo.com]
-- 💼 **LinkedIn**: [Tu perfil de LinkedIn]
+- 📧 **Email**: [alexandertapiaolmedo@gmail.com]
+- 💼 **LinkedIn**: [www.linkedin.com/in/alexander-gubier-oscar-tapia-olmedo-10aa3725b]
 - 🐙 **GitHub**: [@Katapentakill](https://github.com/Katapentakill)
 - 🌐 **Portfolio**: [tu-portfolio.com]
 
